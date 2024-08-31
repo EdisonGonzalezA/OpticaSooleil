@@ -9,82 +9,68 @@
                     Óptica Sooleil
                 </p>
                 <p class="mt-1 text-white">
-                    &copy; <?php echo date('Y'); ?> Copyright: <a href="https://github.com/EdisonGonzalezA" target="_blank" class="text-white">Grupo6</a>
+                    &copy; <?php echo date('Y'); ?> Copyright: <a href="https://github.com/EdisonGonzalezA/OpticaSooleil" target="_blank" class="text-white">Grupo6</a>
                 </p>
             </div>
             <!-- Grid column -->
         </div>
         <!-- Grid row -->
     </div>
-    <!-- Contenedor para el widget de WhatsApp y el título -->
-    <div style="position: relative; display: inline-block;">
-        <!-- Título sobre el ícono de WhatsApp -->
-        <span style="
-        position: absolute;
-        top: -135px; /* Ajusta la posición vertical del título */
-        left: 100%;
-        transform: translateX(920%);
-        background-color: #25d366;
-        color: white;
-        padding: 5px 10px;
-        border-radius: 5px;
-        font-size: 14px;
-        white-space: nowrap;
-    ">
-            Hola, soy tu asistente Virtual
-        </span>
-        <!-- Widget de WhatsApp -->
-        <a href="https://api.whatsapp.com/send?phone=+593969866869&text=Hola,%20necesito%20más%20información%20sobre%20los%20servicios%20que%20presta%20la%20óptica." class="whatsapp-button" target="_blank">
-            <i class="fab fa-whatsapp whatsapp-icon"></i>
-        </a>
-    </div>
 
-    <!-- Estilos para el botón de WhatsApp -->
     <style>
-        .whatsapp-button {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #25d366;
-            color: white;
-            border-radius: 50%;
-            text-align: center;
-            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
-            padding: 15px;
-            z-index: 1000;
-            animation: bounce 2s infinite;
+        body {
+            font-family: Arial, sans-serif;
         }
 
-        .whatsapp-button:hover {
-            background-color: #20b858;
-            color: white;
-            text-decoration: none;
+        .whatsapp-container {
+            position: fixed;
+            bottom: 50px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .whatsapp-container:hover {
             transform: scale(1.1);
         }
 
         .whatsapp-icon {
-            font-size: 80px;
+            width: 55px;
+            height: 50px;
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg');
+            background-size: cover;
+            margin-right: 10px;
+            animation: bounce 1s infinite;
         }
 
         @keyframes bounce {
 
             0%,
-            20%,
-            50%,
-            80%,
             100% {
                 transform: translateY(0);
             }
 
-            40% {
+            50% {
                 transform: translateY(-10px);
             }
+        }
 
-            60% {
-                transform: translateY(-5px);
-            }
+        .whatsapp-text {
+            font-size: 18px;
+            color: #25D366;
         }
     </style>
+    </head>
+
+    <body>
+        <div class="whatsapp-container" onclick="window.open('https://wa.me/593969866869?text=Hola, me gustaría más información', 'sobre sus servicios')">
+            <div class="whatsapp-icon"></div>
+            <div class="whatsapp-text">Hola soy tu asistente virtual</div>
+        </div>
+
+
 </footer>
 <!-- Asegúrate de tener FontAwesome incluido para los íconos -->
 <script src="https://kit.fontawesome.com/af1771b0a0.js" crossorigin="anonymous"></script>

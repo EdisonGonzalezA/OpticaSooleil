@@ -14,7 +14,7 @@ session_name('admin_session');
 session_start();
 
 
-define('SITE_URL', 'http://localhost/sexto/Proyecto/opticaFinal/');
+define('SITE_URL', 'http://localhost/sexto/Proyecto/OpticaSooleil/');
 
 /**
  * URL del panel de administración
