@@ -21,17 +21,17 @@ class Mailer
 
         try {
             //Server settings
-            $mail->SMTPDebug = SMTP::DEBUG_OFF;                //Enable verbose debug output
+            $mail->SMTPDebug =  SMTP::DEBUG_OFF;         //SMTP::DEBUG_SERVER;       
             $mail->isSMTP();
-            $mail->Host       = MAIL_HOST;                     //Configure el servidor SMTP para enviar
-            $mail->SMTPAuth   = true;                          // Habilita la autenticación SMTP
-            $mail->Username   = MAIL_USER;                     //Usuario SMTP
-            $mail->Password   = MAIL_PASS;                     //Contraseña SMTP
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; //Habilitar el cifrado TLS
-            $mail->Port       = MAIL_PORT;                     //Puerto TCP al que conectarse, si usa 587 agregar `SMTPSecure = PHPMailer :: ENCRYPTION_STARTTLS`
+            $mail->Host       = 'smtp.gmail.com';
+            $mail->SMTPAuth   = true;
+            $mail->Username   = 'edisongonzalezalberca@gmail.com';
+            $mail->Password   = 'Mifamiliamivida2022';
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+            $mail->Port       = 465;
 
             //Correo emisor y nombre
-            $mail->setFrom(MAIL_USER, 'Tienda CDP');
+            $mail->setFrom('edisongonzalezalberca@gmail.com', 'Óptica Sooleil');
             //Correo receptor y nombre
             $mail->addAddress($email);
 
