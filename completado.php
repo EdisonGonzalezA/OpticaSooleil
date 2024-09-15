@@ -37,7 +37,7 @@ if ($id_transaccion == '') {
     }
 }
 // Función para generar el PDF
-function generarPDF($id_transaccion, $row, $sqlDet)
+/*function generarPDF($id_transaccion, $row, $sqlDet)
 {
     // Crear la carpeta 'reports' si no existe
     if (!file_exists('fpdf/reports')) {
@@ -83,13 +83,105 @@ function generarPDF($id_transaccion, $row, $sqlDet)
 
     // Retornar el nombre del archivo
     return $fileName;
+}*/
+
+function generarPDF($id_transaccion, $row, $sqlDet, $con)
+{
+    if (!file_exists('fpdf/reports')) {
+        mkdir('fpdf/reports', 0777, true);
+    }
+
+    $pdf = new FPDF();
+    $pdf->AddPage();
+
+    // Añadir logo
+    $pdf->Image('images/optica.jpg', 10, 10, 30);
+
+    $pdf->SetFont('Arial', 'B', 16);
+
+    // Encabezado
+    $pdf->Cell(0, 10, 'Nota de Venta - Folio: ' . $id_transaccion, 0, 1, 'C');
+    $pdf->Ln(10);
+
+    // Obtener datos del cliente desde la base de datos
+    $sqlCliente = $con->prepare("SELECT dni, apellidos, nombres, telefono FROM clientes WHERE email=?");
+    $sqlCliente->execute([$row['email']]);
+    $cliente = $sqlCliente->fetch(PDO::FETCH_ASSOC);
+
+    if ($cliente) {
+        // Información del cliente
+        $pdf->SetFont('Arial', 'B', 12);
+        $pdf->Cell(0, 10, 'Datos del Cliente', 0, 1);
+        $pdf->SetFont('Arial', '', 12);
+        $pdf->Cell(0, 10, 'Nombre: ' . $cliente['nombres'] . ' ' . $cliente['apellidos'], 0, 1);
+        $pdf->Cell(0, 10, 'Cedula/RUC: ' . $cliente['dni'], 0, 1);
+        $pdf->Cell(0, 10, 'Telefono: ' . $cliente['telefono'], 0, 1);
+        $pdf->Ln(10);
+    } else {
+        $pdf->SetFont('Arial', 'B', 12);
+        $pdf->Cell(0, 10, 'Datos del Cliente no encontrados.', 0, 1);
+        $pdf->Ln(10);
+    }
+
+    // Información de la compra
+    $pdf->SetFont('Arial', '', 12);
+    $pdf->Cell(0, 10, 'Fecha de compra: ' . $row['fecha'], 0, 1);
+    $pdf->Cell(0, 10, 'Total: $' . number_format($row['total'], 2), 0, 1); // El total ya incluye el IVA
+    $pdf->Ln(10);
+
+    // Tabla de productos
+    $pdf->SetFont('Arial', 'B', 12);
+    $pdf->Cell(80, 10, 'Producto', 1);
+    $pdf->Cell(30, 10, 'Cantidad', 1);
+    $pdf->Cell(40, 10, 'Precio Unitario', 1);
+    $pdf->Cell(40, 10, 'Subtotal', 1);
+    $pdf->Ln();
+
+    $pdf->SetFont('Arial', '', 12);
+    $subtotal = 0;
+
+    while ($item = $sqlDet->fetch(PDO::FETCH_ASSOC)) {
+        $nombre = $item['nombre'];
+        $precio = $item['precio']; // Precio unitario ya con IVA
+        $cantidad = $item['cantidad'];
+        $total_item = $precio * $cantidad;
+
+        $pdf->Cell(80, 10, $nombre, 1);
+        $pdf->Cell(30, 10, $cantidad, 1, 0, 'C');
+        $pdf->Cell(40, 10, '$' . number_format($precio, 2), 1, 0, 'R');
+        $pdf->Cell(40, 10, '$' . number_format($total_item, 2), 1, 0, 'R');
+        $pdf->Ln();
+
+        $subtotal += $total_item;
+    }
+
+    // No es necesario calcular IVA, ya que el total ya lo incluye
+    $pdf->Ln(10);
+    $pdf->Cell(155, 10, 'Total a Pagar', 1, 0, 'R');
+    $pdf->Cell(35, 10, '$' . number_format($subtotal, 2), 1, 1, 'R'); // El total ya incluye IVA
+
+    // Salida del PDF
+    /*$fileName = 'nota_venta_' . $id_transaccion . '.pdf';
+    $pdf->Output('F', 'fpdf/reports/' . $fileName);
+
+    // Devolver el nombre del archivo
+    return $fileName;*/
+    $pdf->Output('I', 'nota_venta_' . $id_transaccion . '.pdf');
 }
 
 // Si se hace clic en el botón para generar la nota de venta en PDF
 if (isset($_POST['generar_pdf'])) {
-    $fileName = generarPDF($id_transaccion, $row, $sqlDet);
-    header('Location: fpdf/reports/' . $fileName);
-    exit();
+    // Verifica que se haya establecido la conexión a la base de datos
+    if (isset($con)) {
+        // Llama a la función generarPDF y obtén el nombre del archivo generado
+        $fileName = generarPDF($id_transaccion, $row, $sqlDet, $con); // Asegúrate de pasar la conexión a la base de datos
+
+        // Redirige al archivo PDF generado
+        header('Location: fpdf/reports/' . $fileName);
+        exit();
+    } else {
+        echo "Error: No se pudo establecer la conexión a la base de datos.";
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -156,7 +248,8 @@ if (isset($_POST['generar_pdf'])) {
                 <div class="row">
                     <div class="col">
                         <form method="POST">
-                            <button type="submit" name="generar_pdf" class="btn btn-primary">Generar Nota de Venta en PDF</button>
+                            <!--<button type="submit" name="generar_pdf" class="btn btn-primary" target="_blank">Generar Nota de Venta en PDF</button>-->
+                            <a href="fpdf/reports/nota_venta_<?php echo $id_transaccion; ?>.pdf" target="_blank">Generar Nota de Venta en PDF</a>
                         </form>
                     </div>
                 </div>

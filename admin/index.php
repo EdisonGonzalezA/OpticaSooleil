@@ -39,8 +39,8 @@ if (!empty($_POST)) {
 
     <style>
         body {
-            background-image: url('images/background.jpg');
-            height: 100%;
+            background-image: url('images/background.jpeg');
+            height: 50%;
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
