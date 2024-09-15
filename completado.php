@@ -193,9 +193,9 @@ if (isset($_POST['generar_pdf'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Óptica Sooleil</title>
 
+    <link href="css/estilos.css" rel="stylesheet">
     <link href="<?php echo SITE_URL; ?>css/bootstrap.min.css" rel="stylesheet">
     <link href="css/all.min.css" rel="stylesheet">
-    <link href="css/estilos.css" rel="stylesheet">
 </head>
 
 <body class="d-flex flex-column h-100">

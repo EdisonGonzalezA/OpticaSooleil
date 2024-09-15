@@ -180,7 +180,67 @@ $categorias = $categoriaSql->fetchAll(PDO::FETCH_ASSOC);
             font-weight: bold;
             color: #555;
         }
+
+        /* Responsividad para pantallas pequeñas (móviles y tablets) */
+        @media (max-width: 768px) {
+            .navbar-brand {
+                font-size: 1.5rem;
+            }
+
+            .nav-link {
+                font-size: 1rem;
+            }
+
+            .btn {
+                font-size: 1rem;
+                padding: 10px 20px;
+            }
+
+            .card {
+                margin: 15px 0;
+            }
+
+            .card-body h5 {
+                font-size: 1.2rem;
+            }
+
+            .card-body p {
+                font-size: 0.9rem;
+            }
+
+            .form-select {
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .navbar-brand {
+                font-size: 1.3rem;
+            }
+
+            .nav-link {
+                font-size: 0.9rem;
+            }
+
+            .btn {
+                font-size: 0.9rem;
+                padding: 8px 15px;
+            }
+
+            .card-body h5 {
+                font-size: 1.1rem;
+            }
+
+            .card-body p {
+                font-size: 0.8rem;
+            }
+
+            .form-select {
+                padding: 8px;
+            }
+        }
     </style>
+
 </head>
 
 <body class="d-flex flex-column h-100">

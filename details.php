@@ -179,7 +179,84 @@ if ($sql->fetchColumn() > 0) {
             font-weight: bold;
             color: #555;
         }
+
+        /* Ajustes de responsividad para tablets */
+        @media (max-width: 768px) {
+            .navbar-brand {
+                font-size: 1.4rem;
+            }
+
+            .nav-link {
+                font-size: 1rem;
+            }
+
+            .btn {
+                font-size: 1rem;
+                padding: 10px 20px;
+            }
+
+            .card {
+                margin: 15px 0;
+                padding: 15px;
+            }
+
+            .card-body h5 {
+                font-size: 1.2rem;
+            }
+
+            .card-body p {
+                font-size: 0.9rem;
+            }
+
+            .form-select {
+                padding: 8px 12px;
+            }
+
+            .btn-success,
+            .btn-primary {
+                padding: 10px 20px;
+            }
+        }
+
+        /* Ajustes de responsividad para teléfonos móviles */
+        @media (max-width: 576px) {
+            .navbar-brand {
+                font-size: 1.2rem;
+            }
+
+            .nav-link {
+                font-size: 0.9rem;
+            }
+
+            .btn {
+                font-size: 0.9rem;
+                padding: 8px 15px;
+            }
+
+            .card {
+                margin: 10px 0;
+                padding: 10px;
+            }
+
+            .card-body h5 {
+                font-size: 1.1rem;
+            }
+
+            .card-body p {
+                font-size: 0.8rem;
+            }
+
+            .form-select {
+                padding: 7px 10px;
+            }
+
+            .btn-success,
+            .btn-primary {
+                padding: 8px 15px;
+            }
+        }
     </style>
+
 </head>
 
 <body class="d-flex flex-column h-100">

@@ -25,6 +25,7 @@ if ($productos != null) {
 <html lang="es" class="h-100">
 
 <head>
+    <link href="css/estilos.css" rel="stylesheet">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,7 +33,7 @@ if ($productos != null) {
 
     <link href="<?php echo SITE_URL; ?>css/bootstrap.min.css" rel="stylesheet">
     <link href="css/all.min.css" rel="stylesheet">
-    <link href="css/estilos.css" rel="stylesheet">
+
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
@@ -150,7 +151,64 @@ if ($productos != null) {
             font-weight: bold;
             color: #555;
         }
+
+        /* Media queries para dispositivos móviles y tablets */
+        @media (max-width: 768px) {
+            .navbar-brand {
+                font-size: 1.4rem;
+            }
+
+            .nav-link {
+                font-size: 1rem;
+            }
+
+            .btn {
+                font-size: 1rem;
+                padding: 10px 20px;
+            }
+
+            .card {
+                margin: 15px 0;
+                padding: 15px;
+            }
+
+            .card-body h5 {
+                font-size: 1.2rem;
+            }
+
+            .card-body p {
+                font-size: 0.9rem;
+            }
+
+            .form-select {
+                padding: 8px 12px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .navbar-brand {
+                font-size: 1.2rem;
+            }
+
+            .nav-link {
+                font-size: 0.9rem;
+            }
+
+            .btn {
+                font-size: 0.9rem;
+                padding: 8px 15px;
+            }
+
+            .card-body h5 {
+                font-size: 1.1rem;
+            }
+
+            .card-body p {
+                font-size: 0.8rem;
+            }
+        }
     </style>
+
 </head>
 
 <body class="d-flex flex-column h-100">

@@ -10,6 +10,8 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="css/estilos.css">
+
     <style>
         body {
             font-family: 'Open Sans', sans-serif;
@@ -134,7 +136,75 @@
             font-weight: 700;
             color: #555;
         }
+
+        /* Media queries para dispositivos móviles y tablets */
+        @media (max-width: 768px) {
+            #presentacion h1 {
+                font-size: 2.5rem;
+            }
+
+            #presentacion p {
+                font-size: 1.1rem;
+            }
+
+            .card-title {
+                font-size: 1.4rem;
+            }
+
+            #mision-vision p {
+                font-size: 1rem;
+            }
+
+            .btn {
+                font-size: 1rem;
+                padding: 10px 20px;
+            }
+
+            .container h2 {
+                font-size: 1.8rem;
+            }
+
+            .container h5 {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            #presentacion h1 {
+                font-size: 2rem;
+            }
+
+            #presentacion p {
+                font-size: 1rem;
+            }
+
+            .card-title {
+                font-size: 1.3rem;
+            }
+
+            #mision-vision p {
+                font-size: 0.9rem;
+            }
+
+            .btn {
+                font-size: 0.9rem;
+                padding: 8px 15px;
+            }
+
+            .container h2 {
+                font-size: 1.6rem;
+            }
+
+            .container h5 {
+                font-size: 1rem;
+            }
+
+            #mision-vision .img-fluid {
+                max-width: 100%;
+            }
+        }
     </style>
+
 </head>
 
 <body>
