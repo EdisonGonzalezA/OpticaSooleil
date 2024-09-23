@@ -21,28 +21,19 @@ class Mailer
 
         try {
             //Server settings
-            /*$mail->SMTPDebug =  SMTP::DEBUG_SERVER;         //SMTP::DEBUG_OFF;     o       SMTP::DEBUG_SERVER;     
+            $mail->SMTPDebug =  SMTP::DEBUG_SERVER;         //SMTP::DEBUG_OFF;     o       SMTP::DEBUG_SERVER;     
             $mail->isSMTP();
             $mail->Host       = 'smtp.gmail.com';
             $mail->SMTPAuth   = true;
             $mail->Username   = 'edisongonzalezalberca1@gmail.com';
-            $mail->Password   = 'EvelyN210684';
+            $mail->Password   = 'xhkb hmzo gqre vfse';
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;  //PHPMailer::ENCRYPTION_SMTPS;  o     PHPMailer::ENCRYPTION_STARTTLS;
-            $mail->Port       = 587;               //PORT  465 o 587*/
-            //Server settings
-            $mail->SMTPDebug = SMTP::DEBUG_OFF;                //Enable verbose debug output
-            $mail->isSMTP();
-            $mail->Host       = MAIL_HOST;                     //Configure el servidor SMTP para enviar
-            $mail->SMTPAuth   = true;                          // Habilita la autenticación SMTP
-            $mail->Username   = MAIL_USER;                     //Usuario SMTP
-            $mail->Password   = MAIL_PASS;                     //Contraseña SMTP
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; //Habilitar el cifrado TLS
-            $mail->Port       = MAIL_PORT;                     //Puerto TCP al que conectarse, si usa 587 agregar `SMTPSecure = PHPMailer :: ENCRYPTION_STARTTLS`
-
+            $mail->Port       = 587;               //PORT  465 o 587
+            $mail->setLanguage('es');
 
 
             //Correo emisor y nombre
-            $mail->setFrom(MAIL_USER, 'Óptica Sooleil');
+            $mail->setFrom(MAIL_USER, 'Optica Sooleil');
             //Correo receptor y nombre
             $mail->addAddress($email);
 

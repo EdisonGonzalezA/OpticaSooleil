@@ -48,7 +48,9 @@ if ($idTransaccion != '') {
 
             $asunto = "Detalles de su pedido - Óptica Sooleil";
             $cuerpo = "<h4>Gracias por su compra</h4>";
-            $cuerpo .= '<p>El ID de su compra es: <b>' . $idTransaccion . '</b></p>';
+            $cuerpo .= '<p>El ID de su compra es: <b>' . $idTransaccion . '</b><br>Con este ID puede acercarse a nuestro local a retirar su compra.</p>';
+            //$cuerpo .= '<p>El ID de su compra es: <b>' . $idTransaccion . '</b>\n Con este ID puede acercarce a nuestro local a retirar su compra.</p>';
+            //$cuerpo .= '<p>Con este ID puede acercarce a nuestro local a retirar su compra</p>';
 
             require 'Mailer.php';
             $mailer = new Mailer();
