@@ -21,17 +21,28 @@ class Mailer
 
         try {
             //Server settings
-            $mail->SMTPDebug =  SMTP::DEBUG_OFF;         //SMTP::DEBUG_SERVER;       
+            /*$mail->SMTPDebug =  SMTP::DEBUG_SERVER;         //SMTP::DEBUG_OFF;     o       SMTP::DEBUG_SERVER;     
             $mail->isSMTP();
             $mail->Host       = 'smtp.gmail.com';
             $mail->SMTPAuth   = true;
-            $mail->Username   = 'edisongonzalezalberca@gmail.com';
-            $mail->Password   = 'Mifamiliamivida2022';
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-            $mail->Port       = 465;
+            $mail->Username   = 'edisongonzalezalberca1@gmail.com';
+            $mail->Password   = 'EvelyN210684';
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;  //PHPMailer::ENCRYPTION_SMTPS;  o     PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port       = 587;               //PORT  465 o 587*/
+            //Server settings
+            $mail->SMTPDebug = SMTP::DEBUG_OFF;                //Enable verbose debug output
+            $mail->isSMTP();
+            $mail->Host       = MAIL_HOST;                     //Configure el servidor SMTP para enviar
+            $mail->SMTPAuth   = true;                          // Habilita la autenticación SMTP
+            $mail->Username   = MAIL_USER;                     //Usuario SMTP
+            $mail->Password   = MAIL_PASS;                     //Contraseña SMTP
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; //Habilitar el cifrado TLS
+            $mail->Port       = MAIL_PORT;                     //Puerto TCP al que conectarse, si usa 587 agregar `SMTPSecure = PHPMailer :: ENCRYPTION_STARTTLS`
+
+
 
             //Correo emisor y nombre
-            $mail->setFrom('edisongonzalezalberca@gmail.com', 'Óptica Sooleil');
+            $mail->setFrom(MAIL_USER, 'Óptica Sooleil');
             //Correo receptor y nombre
             $mail->addAddress($email);
 
@@ -41,6 +52,7 @@ class Mailer
 
             //Cuerpo del correo
             $mail->Body = mb_convert_encoding($cuerpo, 'ISO-8859-1', 'UTF-8');
+            //$mail->setLanguage('es', '../phpmailer/language/phpmailer.lang-es.php');
 
             //Enviar correo
             return $mail->send();

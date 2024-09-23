@@ -36,54 +36,6 @@ if ($id_transaccion == '') {
         $error = "Error al comprobar la compra";
     }
 }
-// Función para generar el PDF
-/*function generarPDF($id_transaccion, $row, $sqlDet)
-{
-    // Crear la carpeta 'reports' si no existe
-    if (!file_exists('fpdf/reports')) {
-        mkdir('fpdf/reports', 0777, true);
-    }
-
-    $pdf = new FPDF();
-    $pdf->AddPage();
-
-    $pdf->Image('images/optica.jpg', 10, 10, 30); // Cambia la ruta y tamaño según el logo
-
-    $pdf->SetFont('Arial', 'B', 16);
-
-    // Encabezado
-    $pdf->Cell(0, 10, 'Nota de Venta - Folio: ' . $id_transaccion, 0, 1, 'C');
-    $pdf->Ln(10);
-
-    // Información de la compra
-    $pdf->SetFont('Arial', '', 12);
-    $pdf->Cell(0, 10, 'Fecha de compra: ' . $row['fecha'], 0, 1);
-    $pdf->Cell(0, 10, 'Total: $' . $row['total'], 0, 1);
-    $pdf->Ln(10);
-
-    // Tabla de productos
-    $pdf->SetFont('Arial', 'B', 12);
-    $pdf->Cell(30, 10, 'Cantidad', 1);
-    $pdf->Cell(80, 10, 'Producto', 1);
-    $pdf->Cell(40, 10, 'Importe', 1);
-    $pdf->Ln();
-
-    $pdf->SetFont('Arial', '', 12);
-    while ($row_det = $sqlDet->fetch(PDO::FETCH_ASSOC)) {
-        $importe =  $row_det['cantidad'] * $row_det['precio'];
-        $pdf->Cell(30, 10, $row_det['cantidad'], 1);
-        $pdf->Cell(80, 10, $row_det['nombre'], 1);
-        $pdf->Cell(40, 10, $importe, 1);
-        $pdf->Ln();
-    }
-
-    // Guardar el PDF
-    $fileName = 'nota_de_venta_' . $id_transaccion . '.pdf';
-    $pdf->Output('F', 'fpdf/reports/' . $fileName);
-
-    // Retornar el nombre del archivo
-    return $fileName;
-}*/
 
 function generarPDF($id_transaccion, $row, $sqlDet, $con)
 {
@@ -141,6 +93,7 @@ function generarPDF($id_transaccion, $row, $sqlDet, $con)
     $subtotal = 0;
 
     while ($item = $sqlDet->fetch(PDO::FETCH_ASSOC)) {
+        //$item->MultiCell(0, 5, iconv('UTF-8', 'windows-1252', $item), 0, 'J');
         $nombre = $item['nombre'];
         $precio = $item['precio']; // Precio unitario ya con IVA
         $cantidad = $item['cantidad'];
@@ -161,12 +114,12 @@ function generarPDF($id_transaccion, $row, $sqlDet, $con)
     $pdf->Cell(35, 10, '$' . number_format($subtotal, 2), 1, 1, 'R'); // El total ya incluye IVA
 
     // Salida del PDF
-    /*$fileName = 'nota_venta_' . $id_transaccion . '.pdf';
+    $fileName = 'nota_venta_' . $id_transaccion . '.pdf';
     $pdf->Output('F', 'fpdf/reports/' . $fileName);
 
     // Devolver el nombre del archivo
-    return $fileName;*/
-    $pdf->Output('I', 'nota_venta_' . $id_transaccion . '.pdf');
+    return $fileName;
+    //$pdf->Output('F', 'nota_venta_' . $id_transaccion . '.pdf');
 }
 
 // Si se hace clic en el botón para generar la nota de venta en PDF
@@ -177,8 +130,9 @@ if (isset($_POST['generar_pdf'])) {
         $fileName = generarPDF($id_transaccion, $row, $sqlDet, $con); // Asegúrate de pasar la conexión a la base de datos
 
         // Redirige al archivo PDF generado
-        header('Location: fpdf/reports/' . $fileName);
-        exit();
+        /*header('Location: fpdf/reports/' . $fileName);
+        exit();*/
+        echo '<script>window.open("fpdf/reports/' . $fileName . '", "_blank");</script>';
     } else {
         echo "Error: No se pudo establecer la conexión a la base de datos.";
     }
@@ -245,16 +199,17 @@ if (isset($_POST['generar_pdf'])) {
                         </table>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col">
-                        <form method="POST">
-                            <!--<button type="submit" name="generar_pdf" class="btn btn-primary" target="_blank">Generar Nota de Venta en PDF</button>-->
-                            <a href="fpdf/reports/nota_venta_<?php echo $id_transaccion; ?>.pdf" target="_blank">Generar Nota de Venta en PDF</a>
-                        </form>
-                    </div>
-                </div>
+
 
             <?php } ?>
+            <div class="row">
+                <div class="col">
+                    <form method="POST">
+                        <button type="submit" name="generar_pdf" class="btn btn-primary">Generar Nota de Venta en PDF</button>
+                        <!--<a href="fpdf/reports/nota_venta_<?php echo $id_transaccion; ?>.pdf" target="_blank">Generar Nota de Venta en PDF</a>-->
+                    </form>
+                </div>
+            </div>
 
         </div>
     </main>

@@ -67,7 +67,7 @@
     <body>
         <div class="whatsapp-container" onclick="window.open('https://wa.me/593969866869?text=Hola, me gustaría más información', 'sobre sus servicios')">
             <div class="whatsapp-icon"></div>
-            <div class="whatsapp-text">Hola soy tu asistente virtual</div>
+            <div class="whatsapp-text">Hola escribeme o enviame notas de voz</div>
         </div>
 
 

@@ -29,7 +29,7 @@ foreach ($datosConfig as $datoConfig) {
 /**
  * URL
  */
-define('SITE_URL', 'http://localhost/sexto/Proyecto/OpticaSooleil/');
+define('SITE_URL', 'http://localhost/sexto/Proyecto/OpticaSooleil /');
 
 /**
  * Clave o contraseña para cifrado.
