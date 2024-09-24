@@ -56,7 +56,7 @@ if (is_array($datos)) {
             //require_once 'Mailer.php';
             //require 'Mailer.php';
 
-            $asunto = "Detalles de su pedido - Óptica Sooleil";
+            $asunto = "Detalles de su pedido - Optica Sooleil";
             $cuerpo = "<h4>Gracias por su compra</h4>";
             $cuerpo .= '<p>El ID de su compra es: <b>' . $idTransaccion . '</b></p>';
 
